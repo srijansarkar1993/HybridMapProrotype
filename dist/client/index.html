@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Three.js</title>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0px;
+    }
+
+    #container {
+      display: flex;
+      height: 100vh;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    #threeDimensionalMap,
+    #twoDimensionalMap {
+      flex: 1;
+      height: 100%;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+    }
+
+    #threeDimensionalMap {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      z-index: 1;
+     
+    }
+
+    #twoDimensionalMap {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      z-index: 0;
+    }
+
+    @media only screen and (max-width: 768px) {
+      #container {
+        flex-direction: column;
+      }
+
+      #threeDimensionalMap,
+      #twoDimensionalMap {
+        height: 50vh;
+        width: 100%;
+      }
+    }
+
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+    }
+
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+  </style>
+  <script type="module" src="bundle.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI8JKZ36ZlFkRG8Bsd0T_a3bPgXYkEwAw"></script>
+  <script>
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      if (tabName == 'TwoD') {
+        document.getElementById('twoDimensionalMap').style.display = "block";
+      }
+      else if (tabName == 'HyBrid') {
+        document.getElementById('twoDimensionalMap').style.display = "block";
+        document.getElementById('threeDimensionalMap').style.display = "block";
+      }
+
+      if (evt.type == 'load')
+        document.getElementsByClassName("tablinks")[0].click();
+      else
+        evt.currentTarget.className += " active";
+    }
+  </script>
+</head>
+
+<body onload="openTab(event, 'TwoD')">
+  <div id="map-page">
+    <div class="tab">
+      <button class="tablinks active" onclick="openTab(event, 'TwoD')">2D Map</button>
+      <button class="tablinks" onclick="openTab(event, 'HyBrid')">2D + 3D Map</button>
+    </div>
+    <div id="container">
+      <div id="twoDimensionalMap" class="tabcontent">
+        <!-- <div id="map"></div> -->
+      </div>
+      <div id="threeDimensionalMap" class="tabcontent">
+        <!-- <canvas id="canvas"></canvas> -->
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Three.js</title>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0px;
+      }
+
+      #container {
+        display: flex;
+        height: 100vh;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      #threeDimensionalMap,
+      #twoDimensionalMap {
+        flex: 1;
+        height: 100%;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      #threeDimensionalMap {
+        position: relative;
+        width: 100%;
+        height: 50vh;
+        z-index: 1;
+      }
+
+      #twoDimensionalMap {
+        position: relative;
+        width: 100%;
+        height: 50vh;
+        z-index: 0;
+      }
+
+      @media only screen and (max-width: 768px) {
+        #container {
+          flex-direction: column;
+        }
+
+        #threeDimensionalMap,
+        #twoDimensionalMap {
+          height: 50vh;
+          width: 100%;
+        }
+      }
+    </style>
+    <script type="module" src="bundle.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI8JKZ36ZlFkRG8Bsd0T_a3bPgXYkEwAw"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="threeDimensionalMap"></div>
+      <div id="twoDimensionalMap"></div>
+    </div>
+  </body>
+</html> -->
+
+
+
+
+
+
+<!-- AIzaSyBI8JKZ36ZlFkRG8Bsd0T_a3bPgXYkEwAw
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Three.js</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="bundle.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI8JKZ36ZlFkRG8Bsd0T_a3bPgXYkEwAw"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="threeDimensionalMap"></div>
+      <div id="twoDimensionalMap"></div>
+    </div>
+  </body>
+</html> -->
