@@ -7,12 +7,14 @@ const apiKey = process.env.APIKEY == undefined ? "" : process.env.APIKEY;
 
 
 let threeDMap: any;
+let twoDMap: any;
+
 // const pointA = new google.maps.LatLng(48.7099445, 2.1729511);
 // const pointB = new google.maps.LatLng(48.7124770, 2.1667032);
 // const pointB = new google.maps.LatLng(48.6805805, 2.1723437);
 
-const pointA = new google.maps.LatLng(48.729753401702645, 2.27011379809897);
-const pointB = new google.maps.LatLng(48.72402356624323, 2.26906581403999);
+const pointA = new google.maps.LatLng(48.8462, 2.3372);
+const pointB = new google.maps.LatLng(48.8469, 2.3461);
 
 const apiOptions = {
 	"apiKey": apiKey,
@@ -23,8 +25,8 @@ const apiOptions = {
 const mapOptions = {
 	"tilt": 0,
 	"heading": 0,
-	"zoom": 18,
-	"center": { lat: 48.7118741, lng: 2.1694937, altitude: 120 },
+	"zoom": 17,
+	"center": { lat: pointA.lat(), lng: pointA.lng(), altitude: 120 },
 	"mapId": "dca6fc143007e7d4",
 	"mapTypeControl": true,
 	"mapTypeControlOptions": {
@@ -38,6 +40,15 @@ async function init3DMap() {
 		const apiLoader = new Loader(apiOptions);
 		await apiLoader.load();
 		const map = new google.maps.Map(mapDiv, mapOptions);
+
+		// Add a listener to the zoom_changed event of the 2d map
+		twoDMap.addListener("zoom_changed", () => {
+
+			const zoom = twoDMap.getZoom();
+			if (zoom && zoom >= mapOptions.zoom) {
+				map.setZoom(zoom);
+			}
+		});
 
 		const directionsService = new google.maps.DirectionsService();
 		const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -166,6 +177,7 @@ function init2DMap() {
 		center: pointA
 	};
 	const map = new google.maps.Map(document.getElementById('twoDimensionalMap') as HTMLElement, myOptions);
+	twoDMap = map;
 	const directionsService = new google.maps.DirectionsService();
 	const directionsDisplay = new google.maps.DirectionsRenderer({ map });
 	// const markerA = new google.maps.Marker({
@@ -269,7 +281,15 @@ function calculateAndDisplayRoute(directionsService: google.maps.DirectionsServi
 		if (status == google.maps.DirectionsStatus.OK) {
 			const path = response?.routes[0].overview_path;
 			let result = directionsDisplay.setDirections(response);
-			console.log(response);
+			const directionsDiv = document.getElementById("googleMapsDirections");
+			if (response && directionsDiv) {
+				// Loop through the steps and print the instructions
+				const steps = response.routes[0].legs[0].steps;
+				for (let i = 0; i < steps.length; i++) {
+					console.log(steps[i].instructions);
+					directionsDiv.innerHTML += steps[i].instructions + "<br>";
+				}
+			}
 		} else {
 			window.alert('Directions request failed due to ' + status);
 		}

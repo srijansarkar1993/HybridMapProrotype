@@ -13,7 +13,7 @@
 
     #container {
       display: flex;
-      height: 100vh;
+      height: 75vh;
       border: 1px solid #ccc;
       padding: 10px;
     }
@@ -32,7 +32,7 @@
       width: 100%;
       height: 70vh;
       z-index: 1;
-     
+
     }
 
     #twoDimensionalMap {
@@ -105,6 +105,9 @@
         document.getElementById('twoDimensionalMap').style.display = "block";
         document.getElementById('threeDimensionalMap').style.display = "block";
       }
+      else if(tabName == "Directions") {
+        document.getElementById('googleMapsDirections').style.display = "block";
+      }
 
       if (evt.type == 'load')
         document.getElementsByClassName("tablinks")[0].click();
@@ -117,16 +120,14 @@
 <body onload="openTab(event, 'TwoD')">
   <div id="map-page">
     <div class="tab">
-      <button class="tablinks active" onclick="openTab(event, 'TwoD')">2D Map</button>
-      <button class="tablinks" onclick="openTab(event, 'HyBrid')">2D + 3D Map</button>
+      <button class="tablinks active" onclick="openTab(event, 'TwoD')">2D Map View</button>
+      <button class="tablinks" onclick="openTab(event, 'HyBrid')">2D + 3D Map View</button>
+      <button class="tablinks" onclick="openTab(event, 'Directions')">Directions</button>
     </div>
     <div id="container">
-      <div id="twoDimensionalMap" class="tabcontent">
-        <!-- <div id="map"></div> -->
-      </div>
-      <div id="threeDimensionalMap" class="tabcontent">
-        <!-- <canvas id="canvas"></canvas> -->
-      </div>
+      <div id="twoDimensionalMap" class="tabcontent"></div>
+      <div id="threeDimensionalMap" class="tabcontent"></div>
+      <div id="googleMapsDirections" class="tabcontent" style="width: 100%"></div>
     </div>
   </div>
 
