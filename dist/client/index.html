@@ -111,6 +111,9 @@
       else if(tabName == "Brief") {
         document.getElementById('brief').style.display = "block";
       }
+      else if(tabName == "Feedback") {
+        document.getElementById('survey').style.display = "block";
+      }
 
       if (evt.type == 'load')
         document.getElementsByClassName("tablinks")[0].click();
@@ -126,6 +129,7 @@
       <button class="tablinks active" onclick="openTab(event, 'Brief')">Brief</button>
       <button class="tablinks" onclick="openTab(event, 'TwoD')">2D Map View</button>
       <button class="tablinks" onclick="openTab(event, 'HyBrid')">2D + 3D Map View</button>
+      <button class="tablinks" onclick="openTab(event, 'Feedback')">Survey</button>
       <button class="tablinks" onclick="openTab(event, 'Directions')">Directions</button>
     </div>
     <div id="container">
@@ -145,6 +149,9 @@
       <div id="twoDimensionalMap" class="tabcontent"></div>
       <div id="threeDimensionalMap" class="tabcontent"></div>
       <div id="googleMapsDirections" class="tabcontent" style="width: 100%"></div>
+      <div id="survey" class="tabcontent" style="width: 100%">
+        <img src="frame.png">
+      </div>
     </div>
   </div>
 
