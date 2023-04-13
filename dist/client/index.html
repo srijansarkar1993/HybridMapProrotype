@@ -108,6 +108,9 @@
       else if(tabName == "Directions") {
         document.getElementById('googleMapsDirections').style.display = "block";
       }
+      else if(tabName == "Brief") {
+        document.getElementById('brief').style.display = "block";
+      }
 
       if (evt.type == 'load')
         document.getElementsByClassName("tablinks")[0].click();
@@ -117,14 +120,28 @@
   </script>
 </head>
 
-<body onload="openTab(event, 'TwoD')">
+<body onload="openTab(event, 'Brief')">
   <div id="map-page">
     <div class="tab">
-      <button class="tablinks active" onclick="openTab(event, 'TwoD')">2D Map View</button>
+      <button class="tablinks active" onclick="openTab(event, 'Brief')">Brief</button>
+      <button class="tablinks" onclick="openTab(event, 'TwoD')">2D Map View</button>
       <button class="tablinks" onclick="openTab(event, 'HyBrid')">2D + 3D Map View</button>
       <button class="tablinks" onclick="openTab(event, 'Directions')">Directions</button>
     </div>
     <div id="container">
+      <div id="brief" class="tabcontent" style="width: 100%; font-size: 25px; text-align:justify;">
+        Hello, and thank you for participating in our study. We are interested in exploring how people remember and recall routes from point A to point B.
+        In this study, we will be asking you to use a prototype route planning tool that we have created. The tool includes a 2D map view and a 2D+3D map view. 
+        We are interested in understanding how these different views affect your ability to memorise and recall the route.<br><br>
+        During the study, we will ask you to use the prototype tool to view and memorise a route from point A to point B in each tab. 
+        We encourage you to remember as many details about the route as you can during this period. There are no time restrictions.<br><br>
+        After using each tab, we will ask you to recall from memory and draw or write whatever you remember (e.g  draw the route, landmarks, street names, etc) on an empty paper. 
+        While you do so, we will urge you to think out loud and explain - what and why you remember.<br><br>
+        Please note that there are no right or wrong answers, and we are not testing your navigational abilities. 
+        We are only interested in understanding your experience and thoughts as you use the tool.
+        Do you have any questions before we begin?
+        
+      </div>
       <div id="twoDimensionalMap" class="tabcontent"></div>
       <div id="threeDimensionalMap" class="tabcontent"></div>
       <div id="googleMapsDirections" class="tabcontent" style="width: 100%"></div>

@@ -9,12 +9,14 @@ const apiKey = process.env.APIKEY == undefined ? "" : process.env.APIKEY;
 let threeDMap: any;
 let twoDMap: any;
 
-// const pointA = new google.maps.LatLng(48.7099445, 2.1729511);
-// const pointB = new google.maps.LatLng(48.7124770, 2.1667032);
-// const pointB = new google.maps.LatLng(48.6805805, 2.1723437);
+//2d+3d final
+const pointA = new google.maps.LatLng(48.844974, 2.344076);
+const pointB = new google.maps.LatLng(48.85128, 2.341805);
 
-const pointA = new google.maps.LatLng(48.8462, 2.3372);
-const pointB = new google.maps.LatLng(48.8469, 2.3461);
+//only 2d
+// const pointA = new google.maps.LatLng(48.8865587406308, 2.3428319582658843);
+// const pointB = new google.maps.LatLng(48.88594577836573, 2.3386153257434548);
+
 
 const apiOptions = {
 	"apiKey": apiKey,
@@ -25,10 +27,11 @@ const apiOptions = {
 const mapOptions = {
 	"tilt": 0,
 	"heading": 0,
-	"zoom": 17,
+	"zoom": 19,
 	"center": { lat: pointA.lat(), lng: pointA.lng(), altitude: 120 },
 	"mapId": "dca6fc143007e7d4",
 	"mapTypeControl": true,
+	clickableIcons: false,
 	"mapTypeControlOptions": {
 		"mapTypeIds": []
 	}
@@ -45,8 +48,8 @@ async function init3DMap() {
 		twoDMap.addListener("zoom_changed", () => {
 
 			const zoom = twoDMap.getZoom();
-			if (zoom && zoom >= mapOptions.zoom) {
-				map.setZoom(zoom);
+			if (zoom) {
+				map.setZoom(zoom + 2);
 			}
 		});
 
